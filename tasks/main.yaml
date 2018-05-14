@@ -1,0 +1,16 @@
+---
+
+- name: Check network device OS
+  assert:
+    that: >
+      ansible_network_os == 'nxos' or
+      ansible_network_os == 'ios' or
+      ansible_network_os == 'junos'
+
+- name: NXOS configure hostname 
+  nxos_command:
+    commands: hostname "{{ hostname_string }}"   
+  when: >
+    ansible_network_os == 'nxos'
+  tags: 
+    - hostname_config
