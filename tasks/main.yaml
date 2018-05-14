@@ -8,8 +8,9 @@
       ansible_network_os == 'junos'
 
 - name: NXOS configure hostname 
-  nxos_command:
-    commands: hostname "{{ hostname_string }}"   
+  nxos_config:
+    lines: hostname "{{ hostname_string }}"   
+    save_when: modified
   when: >
     ansible_network_os == 'nxos'
   tags: 
