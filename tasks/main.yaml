@@ -9,8 +9,7 @@
 
 - name: NXOS configure hostname 
   nxos_config:
-    lines: hostname {{ hostname_string }}  
-    save_when: modified
+    lines: hostname "{{ hostname_string | default( "{{ inventory_hostname }}" ) }}  
   when: >
     ansible_network_os == 'nxos'
   tags: 
